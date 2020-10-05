@@ -1,0 +1,6 @@
+#
+# This file includes packages with requirements for local development.
+#
+
+django
+djangorestframework
