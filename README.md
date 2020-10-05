@@ -1,4 +1,4 @@
-# [Backend API REST & UI Views basé sur DJANGO](https://github.com/MidoAhmed/django-rest-api)
+# [Backend API REST & UI Views based on DJANGO](https://github.com/MidoAhmed/django-rest-api)
 
 >************ Coded in **Django Framework** by **ME** [MEK](https://github.com/MidoAhmed) ************
 
@@ -99,4 +99,4 @@ Visit `http://localhost:5005` in your browser. The app should be up & running.
 <br />
 
 ---
-[Backend API REST & UI Views basé sur DJANGO](#) - Provided by **ME** [MEK](https://github.com/MidoAhmed).
+[Backend API REST & UI Views based on DJANGO](#) - Provided by **ME** [MEK](https://github.com/MidoAhmed).
