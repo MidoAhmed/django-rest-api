@@ -2,7 +2,7 @@
 # This file includes packages with requirements for local development.
 #
 
-django
-djangorestframework
-psycopg2-binary
-django-environ
+django==3.1.2
+djangorestframework==3.12.1
+psycopg2-binary==2.8.6
+django-environ==0.4.5
