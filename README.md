@@ -8,7 +8,7 @@
 - PostgresSQL Database, Django Native ORM
 - 12-Factor based settings via [django-environ](https://github.com/joke2k/django-environ)
 - Clean code-base
-- Deployment scripts: Docker
+- Docker support using docker-compose for development
 
 <br />
 <br />
