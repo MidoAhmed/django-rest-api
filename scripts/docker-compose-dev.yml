@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  postgres:
+    env_file:
+      - ./../.env
+    image: postgres:latest
+    volumes:
+      - "django_rest_api-pgdata:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:${ADMINER_PORT}
+
+volumes:
+  django_rest_api-pgdata:
