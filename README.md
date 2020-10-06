@@ -14,6 +14,8 @@
 - Test-Driven Development (TDD) of APIs
 - Versioning API v1, v2...
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
+- Productivity tip: using Makefile
+- Dockerize the app
 
 
 <br />
