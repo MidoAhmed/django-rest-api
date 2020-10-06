@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     'rest_framework',
     # our apps
-    'djangoRestApi.app'
+    'djangoRestApi.apps.api'
 ]
 
 MIDDLEWARE = [
