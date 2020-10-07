@@ -24,12 +24,3 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
-class TaskListView(ListView):
-    model = Task
-    template_name = 'task/task_list.html'
-
-
-class TaskDetailView(DetailView):
-    model = Task
-    template_name = 'task/task_detail.html'

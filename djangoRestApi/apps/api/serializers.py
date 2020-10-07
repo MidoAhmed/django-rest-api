@@ -6,17 +6,16 @@ from .models import Task
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['id', 'url', 'username', 'email', 'groups']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ['url', 'name']
+        fields = ['id', 'url', 'name']
 
 
 class TaskSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Task
-        fields = ('title', 'description', 'status', 'created')
+        fields = ('id', 'title', 'description', 'status', 'created')
