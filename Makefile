@@ -14,7 +14,8 @@ help:
 	@echo "  make clean - clean project"
 	@echo "  make install - install dependencies"
 	@echo "  make serve - serve the django project"
-	@echo "  make migration - create migrations"
+	@echo "  make showmigrations - show migrations"
+	@echo "  make makemigrations - create migrations"
 	@echo "  make migrate - run migrations"
 	@echo "  make superuser - create a superuser"
 
@@ -40,7 +41,10 @@ install:
 serve:
 	$(MANAGE) runserver
 
-migration:
+showmigrations:
+	$(MANAGE) showmigrations
+
+makemigrations:
 	$(MANAGE) makemigrations
 
 migrate:

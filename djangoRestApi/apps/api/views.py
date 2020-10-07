@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
+from django.views.generic import ListView, DetailView
 from rest_framework import viewsets
 from rest_framework import permissions
+
+from djangoRestApi.apps.api.models import Task
 from djangoRestApi.apps.api.serializers import UserSerializer, GroupSerializer
 
 
@@ -20,3 +23,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class TaskListView(ListView):
+    model = Task
+    template_name = 'task/task_list.html'
+
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'task/task_detail.html'
