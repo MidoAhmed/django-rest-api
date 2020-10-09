@@ -1,13 +1,14 @@
 from django.db import models
 
 
-class Task(models.Model):
-    class TaskStatus(models.TextChoices):
-        INITIATED = "INITIATED"
-        IN_PROGRESS = 'IN_PROGRESS'
-        PENDING = "PENDING"
-        COMPLETED = "COMPLETED"
+class TaskStatus(models.TextChoices):
+    INITIATED = "INITIATED"
+    IN_PROGRESS = 'IN_PROGRESS'
+    PENDING = "PENDING"
+    COMPLETED = "COMPLETED"
 
+
+class Task(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(
@@ -22,6 +23,9 @@ class Task(models.Model):
 
     def is_opened(self):
         return self.status in {
-            self.TaskStatus.INITIATED,
-            self.TaskStatus.IN_PROGRESS,
+            TaskStatus.INITIATED,
+            TaskStatus.IN_PROGRESS,
         }
+
+    def __repr__(self):
+        return '<Task object ({}) "{}" "{}">'.format(self.id, self.title, self.description)

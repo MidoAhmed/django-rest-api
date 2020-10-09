@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
+from .apps.api.viewsets import TaskList
 from .router import router
 
 
@@ -26,5 +28,6 @@ urlpatterns = [
     #path('', include(router.urls)),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('adoptions/', include('djangoRestApi.apps.adoptions.urls'))
+    path('adoptions/', include('djangoRestApi.apps.adoptions.urls')),
+    path('tasks/', TaskList.as_view()),
 ]

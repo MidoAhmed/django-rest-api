@@ -19,3 +19,8 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title', 'description', 'status', 'created')
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['is_opened'] = instance.is_opened()
+        return data
