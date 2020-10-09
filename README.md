@@ -12,11 +12,11 @@
 - Clean code-base
 - Docker support using docker-compose for development
 - Productivity tip: using Makefile
+- Versioning API v1, v2...
 
 > Next Features:
 - Seeding
 - Test-Driven Development (TDD) of APIs
-- Versioning API v1, v2...
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
 - Dockerize the app
 

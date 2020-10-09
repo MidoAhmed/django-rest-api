@@ -1,4 +1,5 @@
-from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView, \
+    ListCreateAPIView
 from rest_framework.pagination import LimitOffsetPagination
 from .serializers import TaskSerializer
 from rest_framework import viewsets
@@ -25,7 +26,10 @@ class TasksPagination(LimitOffsetPagination):
     max_limit = 100
 
 
-class TaskList(ListAPIView):
+class TaskListCreateAPIView(ListCreateAPIView):
+    """
+    API view to retrieve list of tasks or create new
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     filter_backends = (filters.DjangoFilterBackend, SearchFilter)
@@ -36,6 +40,7 @@ class TaskList(ListAPIView):
 
     #
     def get_queryset(self):
+        print(self.request)
         is_opened = self.request.query_params.get('is_opened', None)
         queryset = Task.objects.all()
 
@@ -50,11 +55,10 @@ class TaskList(ListAPIView):
         return queryset
 
 
-class TaskCreate(CreateAPIView):
-    serializer_class = TaskSerializer
-
-
-class TaskRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+class TaskRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    API view to retrieve, update or delete task
+    """
     queryset = Task.objects.all()
     lookup_field = 'id'
     serializer_class = TaskSerializer
