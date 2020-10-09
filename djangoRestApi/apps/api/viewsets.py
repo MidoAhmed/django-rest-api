@@ -1,10 +1,12 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.pagination import LimitOffsetPagination
 from .serializers import TaskSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Task, TaskStatus
 from django_filters import rest_framework as filters
+from rest_framework.filters import SearchFilter
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -18,12 +20,20 @@ class TaskViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class TasksPagination(LimitOffsetPagination):
+    default_limit = 10
+    max_limit = 100
+
+
 class TaskList(ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('id', 'title', 'status')
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('id', 'status')
+    search_fields = ('title', 'description')
+    # pagination_class = TasksPagination
 
+    #
     def get_queryset(self):
         is_opened = self.request.query_params.get('is_opened', None)
         queryset = Task.objects.all()
