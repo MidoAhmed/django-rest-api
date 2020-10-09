@@ -14,6 +14,7 @@
 - Productivity tip: using Makefile
 
 > Next Features:
+- Seeding
 - Test-Driven Development (TDD) of APIs
 - Versioning API v1, v2...
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)

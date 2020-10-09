@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import LimitOffsetPagination
 from .serializers import TaskSerializer
 from rest_framework import viewsets
@@ -31,6 +31,7 @@ class TaskList(ListAPIView):
     filter_backends = (filters.DjangoFilterBackend, SearchFilter)
     filterset_fields = ('id', 'status')
     search_fields = ('title', 'description')
+
     # pagination_class = TasksPagination
 
     #
@@ -47,3 +48,35 @@ class TaskList(ListAPIView):
                 return queryset.exclude(status__in=[TaskStatus.INITIATED, TaskStatus.IN_PROGRESS])
 
         return queryset
+
+
+class TaskCreate(CreateAPIView):
+    serializer_class = TaskSerializer
+
+
+class TaskRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    lookup_field = 'id'
+    serializer_class = TaskSerializer
+
+    # override delete
+    def delete(self, request, *args, **kwargs):
+        task_id = request.data.get('id')
+        response = super().delete(request, *args, **kwargs)
+        if response.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('task_data_{}'.format(task_id))
+        return response
+
+    # override update
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        if response.status_code == 200:
+            from django.core.cache import cache
+            task = response.data
+            cache.set('task_data_{}'.format(task['id']), {
+                'title': task['title'],
+                'description': task['description'],
+                'status': task['status'],
+            })
+        return response

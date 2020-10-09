@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .apps.api.viewsets import TaskList
+from .apps.api.viewsets import TaskList, TaskCreate, TaskRetrieveUpdateDestroy
 from .router import router
 
 
@@ -30,4 +30,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('adoptions/', include('djangoRestApi.apps.adoptions.urls')),
     path('tasks/', TaskList.as_view()),
+    path('tasks/new', TaskCreate.as_view()),
+    path('tasks/<int:id>/', TaskRetrieveUpdateDestroy.as_view())
 ]

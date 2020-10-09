@@ -17,6 +17,8 @@ class Task(models.Model):
         default=TaskStatus.INITIATED
     )
     created = models.DateTimeField(auto_now_add=True)
+    #userId = models.IntegerField(blank=True, null=True, default=None)
+    user_id = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.title
