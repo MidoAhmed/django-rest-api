@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Task, TaskStatus
 from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter
+from rest_framework import authentication, permissions
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -30,6 +31,8 @@ class TaskListCreateAPIView(ListCreateAPIView):
     """
     API view to retrieve list of tasks or create new
     """
+    #authentication_classes = [authentication.BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     filter_backends = (filters.DjangoFilterBackend, SearchFilter)
@@ -40,7 +43,6 @@ class TaskListCreateAPIView(ListCreateAPIView):
 
     #
     def get_queryset(self):
-        print(self.request)
         is_opened = self.request.query_params.get('is_opened', None)
         queryset = Task.objects.all()
 
@@ -59,6 +61,7 @@ class TaskRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     """
     API view to retrieve, update or delete task
     """
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Task.objects.all()
     lookup_field = 'id'
     serializer_class = TaskSerializer

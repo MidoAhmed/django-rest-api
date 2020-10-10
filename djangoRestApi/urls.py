@@ -24,7 +24,7 @@ from .router import router
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', include(router.urls)),
-    # path('api/', include(router.urls)),
+    #path('api/', include(router.urls)),
     re_path(r'api/(?P<version>[v1|v2]+)/', include('djangoRestApi.apps.api.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('adoptions/', include('djangoRestApi.apps.adoptions.urls'))
