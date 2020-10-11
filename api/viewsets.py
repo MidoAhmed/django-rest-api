@@ -11,15 +11,15 @@ from rest_framework.filters import SearchFilter
 from rest_framework import authentication, permissions
 
 
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-
-    @action(methods=['get'], detail=False)
-    def newest(self, request):
-        newest = self.get_queryset().order_by('created').last()
-        serializer = self.get_serializer_class()(newest)
-        return Response(serializer.data)
+# class TaskViewSet(viewsets.ModelViewSet):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+#
+#     @action(methods=['get'], detail=False)
+#     def newest(self, request):
+#         newest = self.get_queryset().order_by('created').last()
+#         serializer = self.get_serializer_class()(newest)
+#         return Response(serializer.data)
 
 
 class TasksPagination(LimitOffsetPagination):
@@ -31,17 +31,16 @@ class TaskListCreateAPIView(ListCreateAPIView):
     """
     API view to retrieve list of tasks or create new
     """
-    #authentication_classes = [authentication.BasicAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     filter_backends = (filters.DjangoFilterBackend, SearchFilter)
     filterset_fields = ('id', 'status')
     search_fields = ('title', 'description')
-
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
     # pagination_class = TasksPagination
 
-    #
+    # override queryset
     def get_queryset(self):
         is_opened = self.request.query_params.get('is_opened', None)
         queryset = Task.objects.all()
@@ -65,6 +64,8 @@ class TaskRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     lookup_field = 'id'
     serializer_class = TaskSerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     # override delete
     def delete(self, request, *args, **kwargs):

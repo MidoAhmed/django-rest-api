@@ -15,17 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from .router import router
-
 
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', include(router.urls)),
     #path('api/', include(router.urls)),
-    re_path(r'api/(?P<version>[v1|v2]+)/', include('djangoRestApi.apps.api.urls')),
+    re_path(r'api/(?P<version>[v1|v2]+)/', include('api.urls')),
+    re_path(r'api/(?P<version>[v1|v2]+)/', include('user.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('adoptions/', include('djangoRestApi.apps.adoptions.urls'))
+    path('adoptions/', include('adoptions.urls'))
 ]
