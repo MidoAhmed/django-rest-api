@@ -3,7 +3,7 @@ from datetime import datetime
 from django.core.management import BaseCommand
 from pytz import UTC
 
-from djangoRestApi.apps.adoptions.models import Vaccine, Pet
+from adoptions.models import Vaccine, Pet
 
 DATETIME_FORMAT = '%m/%d/%Y %H:%M'
 

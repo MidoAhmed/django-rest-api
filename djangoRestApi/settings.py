@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     # our apps
-    'djangoRestApi.apps.api',
-    'djangoRestApi.apps.adoptions'
+    'api',
+    'adoptions'
 ]
 
 MIDDLEWARE = [
