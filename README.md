@@ -13,9 +13,9 @@
 - Docker support using docker-compose for development
 - Productivity tip: using Makefile
 - Versioning API v1, v2...
+- Seeding
 
 > Next Features:
-- Seeding
 - Test-Driven Development (TDD) of APIs
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
 - Dockerize the app

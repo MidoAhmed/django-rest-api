@@ -1,9 +1,14 @@
-
 SETTINGS := dev
 TEST_SETTINGS := test
 MANAGE=python manage.py
+SEED_TARGET_APP?=api
+SEED_NUMBER?=15
 
-.PHONY: all help clean static install serve migration migrate superuser
+
+.PHONY: all help dev-up dev-down clean install serve showmigrations makemigrations migrate superuser seed
+.DEFAULT_GOAL = help
+
+
 
 all: help
 
@@ -18,6 +23,7 @@ help:
 	@echo "  make makemigrations - create migrations"
 	@echo "  make migrate - run migrations"
 	@echo "  make superuser - create a superuser"
+	@echo "  make seed SEED_TARGET_APP=? SEED_NUMBER=?  - seed your database with model instances"
 
 dev-up:
 	echo "starting development environment services..."
@@ -52,6 +58,9 @@ migrate:
 
 superuser:
 	$(MANAGE) createsuperuser
+
+seed:
+	$(MANAGE) seed $(SEED_TARGET_APP) --number=$(SEED_NUMBER)
 
 #deploy:
 #	git pull --ff-only
