@@ -13,7 +13,7 @@
 - Docker support using docker-compose for development
 - Productivity tip: using Makefile
 - Versioning API v1, v2...
-- Seeding
+- Seed your database via [django-seed](https://github.com/Brobin/django-seed)
 
 > Next Features:
 - Test-Driven Development (TDD) of APIs
