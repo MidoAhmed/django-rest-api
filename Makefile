@@ -5,7 +5,7 @@ SEED_TARGET_APP?=api
 SEED_NUMBER?=15
 
 
-.PHONY: all help dev-up dev-down clean install serve showmigrations makemigrations migrate superuser seed
+.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed
 .DEFAULT_GOAL = help
 
 
@@ -18,6 +18,7 @@ help:
 	@echo "  make dev-down - stop development environment"
 	@echo "  make clean - clean project"
 	@echo "  make install - install dependencies"
+	@echo "  make installed-packages - list all installed packages with their versions"
 	@echo "  make serve - serve the django project"
 	@echo "  make showmigrations - show migrations"
 	@echo "  make makemigrations - create migrations"
@@ -43,6 +44,9 @@ clean:
 
 install:
 	pip install -r requirements/$(SETTINGS).txt
+
+installed-packages:
+	pip freeze
 
 serve:
 	$(MANAGE) runserver
