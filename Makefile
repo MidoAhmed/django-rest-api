@@ -1,9 +1,11 @@
-SETTINGS := dev
-TEST_SETTINGS := test
-MANAGE=python manage.py
-SEED_TARGET_APP?=api
-SEED_NUMBER?=15
-
+SETTINGS_MODULE 	?= djangoRestApi.settings
+LOCAL_SETTINGS 		?= local
+TEST_SETTINGS 		?= test
+PRODUCTION_SETTINGS ?= production
+MANAGE				=  python manage.py
+SEED_TARGET_APP 	?= api
+SEED_NUMBER 		?= 15
+DEFAULT_SETTINGS 	?= --settings=$(SETTINGS_MODULE).$(LOCAL_SETTINGS)
 
 .PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test
 .DEFAULT_GOAL = help
@@ -45,13 +47,13 @@ clean:
 	-rm -rf src/*.egg-info
 
 install:
-	pip install -r requirements/$(SETTINGS).txt
+	pip install -r requirements/dev.txt
 
 installed-packages:
 	pip freeze
 
 serve:
-	$(MANAGE) runserver
+	$(MANAGE) runserver $(DEFAULT_SETTINGS)
 
 showmigrations:
 	$(MANAGE) showmigrations
@@ -72,7 +74,9 @@ flake8:
 	flake8
 
 test:
-	$(MANAGE) test
+	$(MANAGE) test --settings=$(SETTINGS_MODULE).$(TEST_SETTINGS)
+
+
 
 #deploy:
 #	git pull --ff-only

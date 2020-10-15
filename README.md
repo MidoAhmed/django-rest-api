@@ -16,10 +16,12 @@
 - Seed your database via [django-seed](https://github.com/Brobin/django-seed)
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
 - Dockerize the app
+- Travis-CI
 
 > Next Features:
 - Test-Driven Development (TDD) of APIs
-- Travis-CI
+- LOGGING (for prod purpose)
+- Release
 
 <br />
 <br />
