@@ -15,7 +15,11 @@ ignore =
   # E501: Line too long
   E501,
   # F401:  imported but unused
-  F401
+  F401,
+  # E402 module level import not at top of file
+  E402,
+  # F403 'from .base import *' used; unable to detect undefined names
+  F403
 
 exclude =
   migrations

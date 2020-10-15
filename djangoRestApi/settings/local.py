@@ -7,4 +7,3 @@ print("Settings loading : %s" % __file__)
 environ.Env.read_env(DEBUG='True')
 
 from .base import *
-

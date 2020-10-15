@@ -71,8 +71,7 @@ ROOT_URLCONF = 'djangoRestApi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,7 +155,7 @@ AUTH_USER_MODEL = 'api.User'
 
 # drf_yasg2 settings
 SWAGGER_SETTINGS = {
-    #'USE_SESSION_AUTH': True,
+    # 'USE_SESSION_AUTH': True,
     'SECURITY_DEFINITIONS': {
         'api_key': {
             'type': 'apiKey',

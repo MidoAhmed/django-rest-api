@@ -14,4 +14,3 @@ environ.Env.read_env(str(Path(__file__).parent / ".production.env"), DEBUG='Fals
 
 # noinspection PyUnresolvedReferences
 from .base import *
-
