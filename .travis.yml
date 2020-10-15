@@ -4,7 +4,8 @@ python:
 
 install: make install
 
-#before_script: make install
+before_script:
+  - cp .env.example djangoRestApi/settings/.test.env
 
 script:
   - make test
