@@ -79,6 +79,8 @@ celerybeat-schedule
 
 # dotenv
 .env
+djangoRestApi/settings/.test.env
+djangoRestApi/settings/.production.env
 
 # virtualenv
 venv/
@@ -149,3 +151,4 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+

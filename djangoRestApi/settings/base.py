@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-from .environment import env
+import environ
+
+# https://github.com/joke2k/django-environ
+env = environ.Env()
+environ.Env.read_env(".env")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 # Application definition
-
 INSTALLED_APPS = [
 
     # django apps
@@ -67,8 +71,7 @@ ROOT_URLCONF = 'djangoRestApi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,12 +86,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoRestApi.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': env.db("DATABASE_URL")
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -107,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -149,7 +155,7 @@ AUTH_USER_MODEL = 'api.User'
 
 # drf_yasg2 settings
 SWAGGER_SETTINGS = {
-    #'USE_SESSION_AUTH': True,
+    # 'USE_SESSION_AUTH': True,
     'SECURITY_DEFINITIONS': {
         'api_key': {
             'type': 'apiKey',

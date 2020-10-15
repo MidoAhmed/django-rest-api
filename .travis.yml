@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.8"
+
+install: make install
+
+before_script:
+  - cp .env.example djangoRestApi/settings/.test.env
+
+script:
+  - make test
+  - make flake8
