@@ -14,12 +14,12 @@
 - Productivity tip: using Makefile
 - Versioning API v1, v2...
 - Seed your database via [django-seed](https://github.com/Brobin/django-seed)
-
-> Next Features:
-- Test-Driven Development (TDD) of APIs
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
 - Dockerize the app
 
+> Next Features:
+- Test-Driven Development (TDD) of APIs
+- Travis-CI
 
 <br />
 <br />

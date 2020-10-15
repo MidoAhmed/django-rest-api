@@ -8,4 +8,4 @@ psycopg2-binary==2.8.6
 django-environ==0.4.5
 django-filter==2.4.0
 django-seed==0.2.2
-drf-yasg==1.18.5
+drf-yasg2==1.18.5
