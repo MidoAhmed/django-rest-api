@@ -5,7 +5,7 @@ SEED_TARGET_APP?=api
 SEED_NUMBER?=15
 
 
-.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed
+.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test
 .DEFAULT_GOAL = help
 
 
@@ -25,6 +25,8 @@ help:
 	@echo "  make migrate - run migrations"
 	@echo "  make superuser - create a superuser"
 	@echo "  make seed SEED_TARGET_APP=? SEED_NUMBER=?  - seed your database with model instances"
+	@echo "  make flake8  - run flake8"
+	@echo "  make test  - run tests"
 
 dev-up:
 	echo "starting development environment services..."
@@ -65,6 +67,12 @@ superuser:
 
 seed:
 	$(MANAGE) seed $(SEED_TARGET_APP) --number=$(SEED_NUMBER)
+
+flake8:
+	flake8
+
+test:
+	$(MANAGE) test
 
 #deploy:
 #	git pull --ff-only

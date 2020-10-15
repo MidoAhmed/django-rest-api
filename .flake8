@@ -1,0 +1,30 @@
+[flake8]
+ignore =
+  # F812: list comprehension redefines ...
+  F812,
+  # H101: Use TODO(NAME)
+  H101,
+  # H202: assertRaises Exception too broad
+  H202,
+  # H233: Python 3.x incompatible use of print operator
+  H233,
+  # H301: one import per line
+  H301,
+  # H306: imports not in alphabetical order (time, os)
+  H306,
+  # E501: Line too long
+  E501,
+  # F401:  imported but unused
+  F401
+
+exclude =
+  migrations
+  __pycache__,
+  manage.py,
+  settings.py,
+  build,
+  dist,
+  venv
+  static
+  scripts
+  requirements
