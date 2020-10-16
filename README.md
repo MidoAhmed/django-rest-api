@@ -17,9 +17,9 @@
 - Documenting Your API via [drf-yasg](https://github.com/axnsan12/drf-yasg)
 - Dockerize the app
 - Travis-CI
+- Test-Driven Development (TDD) of APIs
 
 > Next Features:
-- Test-Driven Development (TDD) of APIs
 - LOGGING (for prod purpose)
 - Release
 
