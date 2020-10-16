@@ -7,7 +7,7 @@ SEED_TARGET_APP 	?= api
 SEED_NUMBER 		?= 15
 DEFAULT_SETTINGS 	?= --settings=$(SETTINGS_MODULE).$(LOCAL_SETTINGS)
 
-.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test
+.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test check-deployment-checklist
 .DEFAULT_GOAL = help
 
 
@@ -29,6 +29,8 @@ help:
 	@echo "  make seed SEED_TARGET_APP=? SEED_NUMBER=?  - seed your database with model instances"
 	@echo "  make flake8  - run flake8"
 	@echo "  make test  - run tests"
+	@echo "  make check-deployment-checklist - check your production settings"
+
 
 dev-up:
 	echo "starting development environment services..."
@@ -76,7 +78,8 @@ flake8:
 test:
 	$(MANAGE) test --settings=$(SETTINGS_MODULE).$(TEST_SETTINGS)
 
-
+check-deployment-checklist:
+	$(MANAGE) check --deploy --settings=$(SETTINGS_MODULE).$(PRODUCTION_SETTINGS)
 
 #deploy:
 #	git pull --ff-only
