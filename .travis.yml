@@ -13,11 +13,11 @@ install:
   - make install
 
 before_script:
-  - docker-compose -f docker-compose-dev.yml -p TEST_django_rest_api up -d
+  - docker-compose -f docker-compose-dev.yml up -d
 
 script:
   - make test
   - make flake8
 
 after_script:
-  - docker-compose -f docker-compose-dev.yml -p TEST_django_rest_api up
+  - docker-compose -f docker-compose-dev.yml down
