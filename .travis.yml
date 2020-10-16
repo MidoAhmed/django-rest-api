@@ -2,15 +2,18 @@ language: python
 python:
   - "3.8"
 
-install: make install
-
-before_script:
-  - cp .env.example .env
-  - cp .test.env.example djangoRestApi/settings/.test.env
-
 services:
   - docker
 
+before_install:
+  - pip install docker-compose
+  - cp .env.example .env
+  - cp .test.env.example djangoRestApi/settings/.test.env
+  - docker-compose -f docker-compose-dev.yml -p TEST_django_rest_api up -d
+
+install: make install
+
+before_script: docker ps
 
 script:
   - make test
