@@ -3,7 +3,7 @@ from django.urls import path
 from user import views
 
 
-app_name = 'user'
+app_name = 'users'
 
 urlpatterns = [
     path('users', views.ListUserView.as_view(), name='list'),

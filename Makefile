@@ -81,6 +81,7 @@ test:
 check-deployment-checklist:
 	$(MANAGE) check --deploy --settings=$(SETTINGS_MODULE).$(PRODUCTION_SETTINGS)
 
+# python manage.py test user.tests.test_users_api.PublicUserApiTests.test_user_exists --settings=djangoRestApi.settings.test
 #deploy:
 #	git pull --ff-only
 #	$(MAKE) install
