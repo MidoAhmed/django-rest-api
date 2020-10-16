@@ -65,7 +65,6 @@ class PrivateUserApiTests(TestCase):
         res = self.client.get(LIST_USERS_URL)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        print(res.data)
         self.assertEqual(res.data, {
             "count": 1,
             "next": None,
