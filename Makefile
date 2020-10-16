@@ -34,11 +34,11 @@ help:
 
 dev-up:
 	echo "starting development environment services..."
-	docker-compose -f scripts/docker-compose-dev.yml -p django_rest_api up -d
+	docker-compose -f docker-compose-dev.yml -p django_rest_api up -d
 	echo "development environment up"
 
 dev-down:
-	docker-compose -f scripts/docker-compose-dev.yml -p django_rest_api down
+	docker-compose -f docker-compose-dev.yml -p django_rest_api down
 
 clean:
 	find . -name "*.pyc" -print0 | xargs -0 rm -rf
@@ -81,6 +81,7 @@ test:
 check-deployment-checklist:
 	$(MANAGE) check --deploy --settings=$(SETTINGS_MODULE).$(PRODUCTION_SETTINGS)
 
+# python manage.py test user.tests.test_users_api.PublicUserApiTests.test_user_exists --settings=djangoRestApi.settings.test
 #deploy:
 #	git pull --ff-only
 #	$(MAKE) install

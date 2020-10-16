@@ -7,7 +7,7 @@ from user.serializers import UserSerializer, AuthTokenSerializer
 
 class ListUserView(generics.ListAPIView):
     """Create a new user in the system"""
-    queryset = get_user_model().objects.all()
+    queryset = get_user_model().objects.all().order_by('-id')
     serializer_class = UserSerializer
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
