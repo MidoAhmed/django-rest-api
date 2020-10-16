@@ -34,11 +34,11 @@ help:
 
 dev-up:
 	echo "starting development environment services..."
-	docker-compose -f scripts/docker-compose-dev.yml -p django_rest_api up -d
+	docker-compose -f docker-compose-dev.yml -p django_rest_api up -d
 	echo "development environment up"
 
 dev-down:
-	docker-compose -f scripts/docker-compose-dev.yml -p django_rest_api down
+	docker-compose -f docker-compose-dev.yml -p django_rest_api down
 
 clean:
 	find . -name "*.pyc" -print0 | xargs -0 rm -rf
