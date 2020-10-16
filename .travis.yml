@@ -16,7 +16,7 @@ before_script:
   - docker-compose -f docker-compose-dev.yml up -d
 
 script:
-  - make test
+  - make wait-for-db && make test
   - make flake8
 
 after_script:

@@ -7,7 +7,7 @@ SEED_TARGET_APP 	?= api
 SEED_NUMBER 		?= 15
 DEFAULT_SETTINGS 	?= --settings=$(SETTINGS_MODULE).$(LOCAL_SETTINGS)
 
-.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test check-deployment-checklist
+.PHONY: all help dev-up dev-down clean install installed-packages serve showmigrations makemigrations migrate superuser seed flake8 test check-deployment-checklist wait-for-db
 .DEFAULT_GOAL = help
 
 
@@ -30,6 +30,7 @@ help:
 	@echo "  make flake8  - run flake8"
 	@echo "  make test  - run tests"
 	@echo "  make check-deployment-checklist - check your production settings"
+	@echo "  make wait-for-db - execute wait_for_db command"
 
 
 dev-up:
@@ -80,6 +81,9 @@ test:
 
 check-deployment-checklist:
 	$(MANAGE) check --deploy --settings=$(SETTINGS_MODULE).$(PRODUCTION_SETTINGS)
+
+wait-for-db:
+	$(MANAGE) wait_for_db
 
 # python manage.py test user.tests.test_users_api.PublicUserApiTests.test_user_exists --settings=djangoRestApi.settings.test
 #deploy:
