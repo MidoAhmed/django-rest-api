@@ -86,6 +86,7 @@ wait-for-db:
 	$(MANAGE) wait_for_db
 
 # python manage.py test user.tests.test_users_api.PublicUserApiTests.test_user_exists --settings=djangoRestApi.settings.test
+
 #deploy:
 #	git pull --ff-only
 #	$(MAKE) install
