@@ -6,6 +6,9 @@ python:
 services:
   - docker
 
+addons:
+  ssh_known_hosts: 104.41.159.59:22
+
 before_install:
   - cp .env.example .env
   - cp .test.env.example djangoRestApi/settings/.test.env
@@ -35,7 +38,7 @@ deploy:
   skip_cleanup: true
   script: bash scripts/deploy.sh
   on:
-    branch: main
+    all_branches: true
 
 after_deploy: 'end deploy --------------------------------------------'
 
