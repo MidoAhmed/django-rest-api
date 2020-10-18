@@ -3,9 +3,6 @@ language: python
 python:
   - '3.8'
 
-addons:
-  ssh_known_hosts: momo@104.41.159.59
-
 services:
   - docker
 
