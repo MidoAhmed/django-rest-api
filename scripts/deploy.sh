@@ -8,7 +8,7 @@
 
 git remote add deploy https://github.com/MidoAhmed/test.git
 git branch -M main
-git push -u origin main:main
+git push -u deploy main:main
 
 
 #git push -u deploy HEAD:refs/heads/master
