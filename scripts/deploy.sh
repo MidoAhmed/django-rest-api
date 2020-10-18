@@ -1,7 +1,7 @@
 #!/bin/bash
 
 git config --global push.default matching
-git remote add deploy ssh://momo@104.41.159.59/srv/git/myapp.git/
+git remote add deploy ssh://$(USER)@$(HOST)/$(srv/git/myapp.git)
 git remote show deploy
 git remote show origin
-git push deploy main
+git push deploy HEAD:master --force
