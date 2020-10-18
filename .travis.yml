@@ -40,6 +40,6 @@ deploy:
   on:
     all_branches: true
 
-after_deploy: 'end deploy --------------------------------------------'
+after_deploy:
 
-after_success: 'after success --------------------------------------------'
+after_success:
