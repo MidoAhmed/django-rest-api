@@ -7,7 +7,8 @@ services:
   - docker
 
 addons:
-  ssh_known_hosts: $\{HOST\}
+  ssh_known_hosts:
+    secure: UXQSuynf1/cxxZxlANdrj/yu4nwA+sEdQlJED8VhirJ2XzWSXoG+L0hHQrcjYfYSktEIHPSkZNwrkbbsT8o95gxJOyd1p8uxIFDEsnjYP/tjW/rsYP24/VGK+MI9ICyHGlQO/EBK29Z2qstNZnIcBC2z3Kb4urKIi9vu+3R0Hw+5JlR7KnoRX1bJd7drrO9liCs15rf5GFIhtkJ85BkrjjmX5T2V5eN5mtCqssY9jFghiVMNvNcWXkqcCYLLD1wqR2nhA8WMlBnE32F54cf1MHCxDjkV2HJmedYBGG5DffLoY8SM9xxO9hfe/CcxLKxCc8XnRHhujXevoK8kv71mSvFvOEGHbtkWqm6l4v43wPg72MODPmWP647h77ACg4UnqZzLNMpQWHOzyFVhkURaegKYasd25OpriOF84ZEBoo2vucmSiaXQA7krdyUs3ht+4AcXpLXm9x0/AYeo8z5rP59focSY5Vf6ahfanXGZIImJkpRXlb0SVxnLZYyKSHPyVMTdlKV4RZd/uEmxswzEs065sKf6UZKO9XhlIQ1LaEs2q06fh3zEClphSwLzuuj+zBUxi5DA2VV459i3Qy3Lzv4HovgVFaoUbuxE2VtriL5f6CS94ClD7Nsm92KKj9cVpMk4+TcfKDmEma1Hh1eBqv7xXFlgt+5X+B91pFiAX9Y=
 
 before_install:
   - cp .env.example .env
