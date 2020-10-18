@@ -37,7 +37,7 @@ deploy:
   skip_cleanup: true
   script: bash scripts/deploy.sh
   on:
-    all_branches: true
+    branch: main
 
 after_deploy:
 
