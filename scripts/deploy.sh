@@ -6,7 +6,7 @@
 #git branch -M master
 #git push -u deploy master
 
-git remote add origin https://github.com/MidoAhmed/test.git
+git remote add deploy https://github.com/MidoAhmed/test.git
 git branch -M main
 git push -u origin main
 
