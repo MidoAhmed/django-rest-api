@@ -7,7 +7,7 @@ services:
   - docker
 
 addons:
-  ssh_known_hosts: 104.41.159.59:22
+  ssh_known_hosts: $HOST:$PORT
 
 before_install:
   - cp .env.example .env
