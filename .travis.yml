@@ -7,7 +7,7 @@ services:
   - docker
 
 addons:
-  ssh_known_hosts: $HOST
+  ssh_known_hosts: ${HOST}
 
 before_install:
   - cp .env.example .env
