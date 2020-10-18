@@ -1,6 +1,5 @@
 #!/bin/bash
 
-git branch
 git remote add deploy ssh://momo@104.41.159.59/home/momo/bar-repository-folder/prj.git
 git remote show deploy
 git fetch --unshallow deploy
