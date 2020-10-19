@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+
+  my-django-backend-app:
+    env_file:
+      - .env
+    image: momo/my-django-backend-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8020:8020
+    volumes:
+      - static_data:/vol/web
+    environment:
+      - SECRET_KEY=samplesecret123
+      - ALLOWED_HOSTS=127.0.0.1,localhost
+    depends_on:
+      - postgres
+
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - "django_rest_api-pgdata:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+
+volumes:
+  static_data:
+  django_rest_api-pgdata:
