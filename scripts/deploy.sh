@@ -2,7 +2,7 @@
 
 git remote add deploy ssh://momo@104.41.159.59/home/momo/bar-repository-folder/project.git
 #git fetch --unshallow deploy
-git push -u deploy HEAD:main
+git push -u deploy HEAD:refs/heads/main
 
 
 
