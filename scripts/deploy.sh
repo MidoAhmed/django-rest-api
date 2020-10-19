@@ -19,3 +19,8 @@ cd ..
 pwd
 git clone ssh://momo@104.41.159.59/~/git/djangoRestApi.git testproject
 ls
+cd testproject
+touch test.txt
+git add .
+git commit 'init commit'
+git push origin master
