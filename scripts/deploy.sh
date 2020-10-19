@@ -7,14 +7,5 @@ setup_git() {
 
 setup_git
 
-# Remove existing "origin"
-git remote rm origin
-# Add new "origin"
-git remote add origin ssh://momo@104.41.159.59:22/home/momo/bar-repository-folder/project.git
-echo '---------'
-git branch
-git branch -r
-git remote set-head origin master
-git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/new_dev
-echo '---------'
-git push -u origin main:master --quiet
+git remote add production ssh://momo@104.41.159.59:22/home/momo/bar-repository-folder/project.git
+git push -u production main:master
