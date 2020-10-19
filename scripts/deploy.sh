@@ -13,4 +13,4 @@ setup_git() {
 #git push production main:refs/heads/master
 
 pwd
-scp -r . momo@104.41.159.59:~/.
+scp -r scripts momo@104.41.159.59:~/.
