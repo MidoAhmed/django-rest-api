@@ -13,4 +13,6 @@ setup_git() {
 #git push production main:refs/heads/master
 
 pwd
-scp -r scripts momo@104.41.159.59:~/.
+#scp -r scripts momo@104.41.159.59:~/.
+
+git clone ssh://momo@104.41.159.59/~/git/djangoRestApi.git
