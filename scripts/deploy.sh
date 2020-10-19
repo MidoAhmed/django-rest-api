@@ -10,4 +10,4 @@ setup_git
 
 git remote add production ssh://momo@104.41.159.59:22/home/momo/bar-repository-folder/project.git
 git remote show production
-git push production --all
+git push production main:master
