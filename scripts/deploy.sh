@@ -23,6 +23,6 @@ cd testproject
 git status
 touch test.txt
 git add .
-git commit 'init commit'
+git commit -m 'init commit'
 git push origin master
 
