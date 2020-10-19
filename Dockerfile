@@ -1,23 +1,30 @@
-FROM python:3.8-alpine
+FROM python:3.8
 MAINTAINER MEK
 
 ENV PYTHONUNBUFFERED 1
 
-COPY  ./requirements/dev.txt /requirements.txt
-RUN apk add --update --no-cache postgresql-client jpeg-dev
-RUN apk add --update --no-cache --virtual .tmp-build-deps \
-      gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
-RUN pip install -r /requirements.txt
-RUN apk del .tmp-build-deps
+# install nginx
+RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
+COPY nginx.default /etc/nginx/sites-available/default
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+      && ln -sf /dev/stderr /var/log/nginx/error.log
 
-RUN mkdir /app
-WORKDIR .
-COPY . /app
 
-RUN mkdir -p /vol/web/media
-RUN mkdir -p /vol/web/static
-RUN adduser -D user
-RUN chown -R user:user /vol/
-RUN chmod -R 755 /vol/web
-USER user
+# copy source and install dependencies
+RUN mkdir -p /opt/app
+RUN mkdir -p /opt/app/pip_cache
+RUN mkdir -p /opt/app/djangoRestApi
+COPY start-server.sh /opt/app/
+COPY  ./requirements/dev.txt opt/app/requirements.txt
+COPY .pip_cache /opt/app/pip_cache/
+COPY . /opt/app/djangoRestApi/
+WORKDIR /opt/app
+RUN pip install -r requirements.txt --cache-dir /opt/app/pip_cache
+RUN chown -R www-data:www-data /opt/app
+
+
+# start server
+EXPOSE 8020
+STOPSIGNAL SIGTERM
+CMD ["/opt/app/start-server.sh"]
 
