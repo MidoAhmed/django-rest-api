@@ -15,5 +15,7 @@ setup_git
 
 pwd
 #scp -r scripts momo@104.41.159.59:~/.
-
-git clone ssh://momo@104.41.159.59/~/git/djangoRestApi.git
+cd ..
+pwd
+git clone ssh://momo@104.41.159.59/~/git/djangoRestApi.git testproject
+ls
