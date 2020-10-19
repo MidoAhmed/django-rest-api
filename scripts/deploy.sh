@@ -24,5 +24,5 @@ git status
 touch test.txt
 git add .
 git commit -m 'init commit'
-git push origin master
+git push origin main:master
 
