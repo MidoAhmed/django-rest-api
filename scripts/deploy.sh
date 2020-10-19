@@ -8,5 +8,5 @@ setup_git() {
 setup_git
 
 git remote add production ssh://momo@104.41.159.59/~/git/djangoRestApi.git
-git remote show production
+#git remote show production
 git push production main:master
