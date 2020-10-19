@@ -13,4 +13,4 @@ git remote show production
 
 git fetch --unshallow origin
 git fetch --unshallow production
-git push production HEAD:main
+git push production HEAD:refs/heads/main
