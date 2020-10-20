@@ -2,22 +2,12 @@ version: '3'
 
 services:
 
-  my-django-backend-app:
+  postgres:
     env_file:
       - .env
-    image: ${DOCKER_HUB_ID}/my-django-backend-app:production
-    ports:
-      - ${APP_PORT}:${APP_PORT}
-    volumes:
-      - static_data:/vol/web
-    depends_on:
-      - postgres
-
-
-  postgres:
     image: postgres:latest
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - "django_rest_api-pgdata:/var/lib/postgresql/data"
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}
@@ -26,5 +16,4 @@ services:
       - ${DATABASE_PORT}:${DATABASE_PORT}
 
 volumes:
-  static_data:
-  pgdata:
+  django_rest_api-pgdata:
