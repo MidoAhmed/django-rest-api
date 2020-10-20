@@ -43,7 +43,7 @@ before_deploy:
 deploy:
   provider: script
   cleanup: true
-  script: bash scripts/deploy.sh
+  script: bash trigger-post-receive-hook-script.sh
   on:
     branch: main
 

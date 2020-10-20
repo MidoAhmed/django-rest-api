@@ -5,17 +5,11 @@ services:
   my-django-backend-app:
     env_file:
       - .env
-    image: momo/my-django-backend-app
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ${DOCKER_HUB_ID}/my-django-backend-app:production
     ports:
-      - 8020:8020
+      - ${APP_PORT}:${APP_PORT}
     volumes:
       - static_data:/vol/web
-    environment:
-      - SECRET_KEY=samplesecret123
-      - ALLOWED_HOSTS=127.0.0.1,localhost
     depends_on:
       - postgres
 
@@ -23,7 +17,7 @@ services:
   postgres:
     image: postgres:latest
     volumes:
-      - "django_rest_api-pgdata:/var/lib/postgresql/data"
+      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}
@@ -33,4 +27,4 @@ services:
 
 volumes:
   static_data:
-  django_rest_api-pgdata:
+  pgdata:
