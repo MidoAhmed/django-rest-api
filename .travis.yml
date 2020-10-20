@@ -29,10 +29,10 @@ script:
   - docker images
   - docker push $DOCKER_HUB_USERNAME/my-django-backend-app:production
 
-after_success: skip
+#after_success: skip
 
 
-after_failure: skip
+#after_failure: skip
 
 
 # START ------ if and only if deployment is active -----
@@ -49,7 +49,7 @@ deploy:
   on:
     branch: main
 
-after_deploy: skip
+#after_deploy: skip
 # END ------ if and only if deployment is active -----
 
 after_script:
