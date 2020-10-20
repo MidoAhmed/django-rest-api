@@ -7,6 +7,6 @@ setup_git() {
 
 setup_git
 
-git remote add production ssh://$USER@$HOST/$GIT_SERVER_DIR
+git remote add production ssh://$MY_USER@$MY_HOST/$GIT_SERVER_DIR
 #git remote show production
 git push production main:master
