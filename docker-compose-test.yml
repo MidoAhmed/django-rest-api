@@ -4,7 +4,7 @@ services:
 
   postgres:
     env_file:
-      - .test.env
+      - .env
     image: postgres:latest
     volumes:
       - "django_rest_api-pgdata:/var/lib/postgresql/data"

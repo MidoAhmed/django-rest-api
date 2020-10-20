@@ -10,7 +10,7 @@ addons:
   ssh_known_hosts: 104.41.159.59
 
 before_install:
-  - cp .env.example .test.env
+  - cp .env.example .env
   #- cp .test.env.example djangoRestApi/settings/.test.env
 
 install:
