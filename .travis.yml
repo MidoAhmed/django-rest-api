@@ -10,22 +10,30 @@ addons:
   ssh_known_hosts: 104.41.159.59
 
 before_install:
-  - cp .env.example .env
-  - cp .test.env.example djangoRestApi/settings/.test.env
+  - cp .env.example .test.env
+  #- cp .test.env.example djangoRestApi/settings/.test.env
 
 install:
   - make install
 
 before_script:
-  - docker-compose -f docker-compose-dev.yml up -d
+  - docker-compose -f docker-compose-test.yml up -d
 
 script:
   - make wait-for-db && make test
   - make flake8
 
-after_script:
-  - docker-compose -f docker-compose-dev.yml down
+after_success:
+  - docker build -t my-django-backend-app .
+  - docker images
+  - docker tag my-django-backend-app:latest $DOCKER_HUB_USERNAME/my-django-backend-app:production
+  - docker images
+  - docker push $DOCKER_HUB_USERNAME/my-django-backend-app:production
 
+after_failure: skip
+
+
+# START ------ if and only if deployment is active -----
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_f4eabd9cea96_key -iv $encrypted_f4eabd9cea96_iv -in deploy_key.pem.enc -out /tmp/deploy_key.pem -d
   - eval "$(ssh-agent -s)"            # start the ssh agent
@@ -39,6 +47,16 @@ deploy:
   on:
     branch: main
 
-after_deploy:
+after_deploy: skip
+# END ------ if and only if deployment is active -----
 
-after_success:
+after_script:
+  - docker-compose -f docker-compose.test.yml down --volumes  #stop containers and remove containers, networks, volumes
+  - docker rmi -f my-django-backend-app
+
+
+env:
+  global:
+    - secure: rc1/Xl9ryGd63RT3CXi2JzMeG9SsM9GyBWUw3BOeXAx1Nb6KvbcOrAJZ0dE7DVxom0TrNbCZfnV1FSqgyOPF/HQ7RTxlrRKzkKimk96J9OPlS/s3r3EWGw0uxfMXkp4z4Mq/eFR+8VPSXqjrZ3wx6x3k9LfGPn12PPzrvBXHUZRi3dewX/+Z3ZzZPm7xmLseOTXmF107T2N2dJqES/xij9HyeMGIj/QV+Sgi6jF01lFzayUlDm6d5Vi9A/YS5eon93tetBgezujIQ80krST4VWPKrSx60Hliz3yK50dWGRAcbThDi2QGGs+iGGOf4uHh8xV0ITDdr27GbIdxWX3d54CUXvxLBXpI4RF4DQqn83+Ou0jLDDtRnvCxJ29WvPIxcvRfMI5+zEKUJIa9HSdtzYMnT216rFH1owl21I4BeI66gaoomqiDVBuNbuxrQunJ9xeHiHvW7N/r3RAvzGsgU/+4O8jFg7sHwBQoWMT4aXQs/8wFvujCPY3RBsU705UypoI9PvlGTWfRT1UUpWePRp8JWhBp/R2QsnFrghRXDDqwECQog4hn+NxUzOOFjaQ0Uq/tWQSP86td8h5RzW5Zug7gda3+JvIHakCyccIARs79X2I4QJCVuBdKM/k6XoWJ78DCP0YOrYpaKvhlvS1Q/uFkorRSz0WCKqMAB9SkPUg=
+    - secure: xJxOR/eyoy5ZYAqDz0MlkcP4U+YopASAs8vN3fRyvxRdhswCx8xCyXdEBBdQOtJh/JDvlrb1w0TXSFlsyOMoAahW3aSmv44pYYccQEWugTIf6MW2IbdUOFp97nODglptTfww8yJ1pLXVFTPEr7IKDk3qXOaqa7gH12mF8xPTIg85rlC7EyDVuhG/UIfQTZhr73xXKOsklp7GWntCcGAvH/6US+SGlt6n8m9ET0MR9tacSXo1tqdE5lMpEUfy3uafw71iXx6JStEDNIBc/EZ3BRgq8sSm/pZqmOy8QM1w/ZM7GIS9i2ZYtM56nxMYhTNjF3aFU3ISIGM/DpqZ4eXBOP/LUHd4FaC/ak57mBdrtNKUuL7I2DLaEDZqUxKUdrE0SkVCkZt+IPfpHJCUK6FBq23jNmThc+Leu6XWe/QE2RAuWqONx8oMtkTwcZyOayaonFGhlalo9aNw01R5PeYZ0JeA48TXCLxXbVJ6TLBjXIVOQvW3+MCqXueR48HA5Gw6o5i/+tzrcQPfJ/hc8aPfsX8/lqSpmQSteqs5mIMW9PNHFHKcW88aVxa9jx1DgQru47Swlot10GRQHmy+Ygbaddf9TZq44kNmxMyQYw2zhQdZWr3NBdZll3muUQfm/KQnP7Ka4BNFcgD808ITdjWuM7bnmlyWYMuVBQg4bD9wnxc=
+    - secure: 0CnXTZ0NHPsC1zDLZ4ixnPVWDu8sWamjLrnat9wIj8QEE5EFVqm7MQOdVQT3MxnKDODvnLMzhrOdw8RS2ijVmWk+tdmZ8iWhooX/MTa/A6s0JRGAKBLWgRSekP0z3YdwgVQwhud9W06Q4/pxdWmDGx9pdTYGLn5qW5JgZ3RMWpMzlKr6clN3ohwVAwdokR3m12Gl0gGE7SiEF2dtVPgGl6E8ehgJ/vS2MAwhLgX1DoXVKPoU5hHlzCRDb7iGSB4yzyUO1zK68RBpvc9tDGpnyLsfLAvqtS+9OTYZiymIi4eaypMFmeu3UsusV6GLLymXi38srtv/Wc6DQOJA7703ewJXCdcwEVQum/P9hqQ1OREHq2ru76weaAFtqT2dNozFLmraTVOoFSSfYhtW72QJl6pr/F/mIBm47Uro43cNlu0zRR2sfbRf4ZJU+qgNjUTMVf7gKgpSfLw4oifRez5+SdelUekVlu/u8WO4EHP0zYoaw1dzuG3Gvx239HLvoG/0q97MRMUD4MFvK15lmWRXwr9OoXojxpRpel+zpCuZRwxWa71jyjFcT0Yv7X3cE8n4r4q9yvskZG12xWoFSIdaVT+Z5oQCI8TCIS4chwyGqGvNl60m0b4ppOGFjjxP7bXh5ILYxwZDvSYl+bcORwNdZgpv0EtQ85r7202qVQv5T/k=
