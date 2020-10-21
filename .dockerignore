@@ -10,6 +10,7 @@
 .idea
 .pydevproject
 .idea/workspace.xml
+.vscode
 .DS_Store
 .git/
 .sass-cache
@@ -25,3 +26,18 @@ web/static/CACHE
 stats
 Dockerfile
 .dockerignore
+deploy_key.pem.enc
+.test.env.example
+.env.example
+.env
+.travis.yml
+.flake8
+.gitignore
+Makefile
+README.md
+deploy.sh
+deploy_key.pem.enc
+docker-compose-test.yml
+docker-compose-dev.yml
+docker-compose.yml
+trigger-post-receive-hook-script.sh
