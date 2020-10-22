@@ -18,6 +18,7 @@
 - Dockerize the app
 - Travis-CI
 - Test-Driven Development (TDD) of APIs
+- Deployment scripts: Docker, Gunicorn / Nginx
 
 > Next Features:
 - LOGGING (for prod purpose)
