@@ -7,4 +7,3 @@ from .base import *
 logger = logging.getLogger(__name__)
 
 logger.debug(" Settings loading: %s" % __file__)
-

@@ -16,13 +16,10 @@ import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-
-
 # https://github.com/joke2k/django-environ
 env = environ.Env()
-#env.read_env(env.str('ENV_PATH', '.env'))
+# env.read_env(env.str('ENV_PATH', '.env'))
 env.read_env(str(Path(__file__).parent.parent.parent / ".env"))
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoRestApi.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -128,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -167,7 +162,6 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'api.User'
-
 
 # drf_yasg2 settings
 SWAGGER_SETTINGS = {
@@ -221,8 +215,6 @@ logging.config.dictConfig({
         'level': 'WARNING',
     },
 })
-
-
 
 # https://sentry.io/
 sentry_sdk.init(
