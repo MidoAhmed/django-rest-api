@@ -2,6 +2,7 @@ from __future__ import absolute_import
 import os
 import sys
 
+
 # When defaults are loaded assume a local development environment
 # All other environments should explicitly choose a right settings
 try:

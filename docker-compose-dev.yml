@@ -5,9 +5,9 @@ services:
   postgres:
     env_file:
       - .env
-    image: postgres:latest
+    image: postgres:12
     volumes:
-      - "django_rest_api-pgdata:/var/lib/postgresql/data"
+      - django_rest_api-pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}

@@ -3,9 +3,11 @@ version: '3'
 services:
 
   my-django-backend-app:
+    restart: always
     env_file:
       - .env
-    image: ${DOCKER_HUB_ID}/my-django-backend-app:production
+    #image: ${DOCKER_HUB_ID}/my-django-backend-app:production
+    image: my-django-backend-app
     ports:
       - ${APP_PORT}:${APP_PORT}
     volumes:
@@ -15,7 +17,8 @@ services:
 
 
   postgres:
-    image: postgres:latest
+    image: postgres:12
+    restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:

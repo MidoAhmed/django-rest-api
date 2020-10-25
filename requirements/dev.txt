@@ -11,3 +11,4 @@ django-seed==0.2.2
 drf-yasg2==1.19.2
 flake8==3.8.4
 gunicorn
+sentry-sdk==0.19.1

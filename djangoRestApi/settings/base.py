@@ -9,18 +9,23 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import logging.config
 import os
 from pathlib import Path
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+
 
 # https://github.com/joke2k/django-environ
 env = environ.Env()
+#env.read_env(env.str('ENV_PATH', '.env'))
+env.read_env(str(Path(__file__).parent.parent.parent / ".env"))
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-environ.Env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -29,7 +34,7 @@ environ.Env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = env.bool("DEBUG", default=True)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
@@ -177,23 +182,55 @@ SWAGGER_SETTINGS = {
 }
 
 # https://docs.djangoproject.com/en/3.1/topics/logging/
-LOGGING = {
+LOGGING_CONFIG = None
+logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'short': {
+            'format': '%(asctime)s %(levelname)-7s %(thread)-5d %(message)s',
+            'datefmt': '%H:%M:%S',
+        },
+        'verbose': {
+            'format': '%(asctime)s %(levelname)-7s %(thread)-5d %(name)s %(filename)s:%(lineno)s | %(funcName)s | %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'console': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+
+    },
     'handlers': {
         'console': {
-            'class': 'logging.StreamHandler'
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+        'djangoRestApi': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
         },
     },
     'root': {
         'handlers': ['console'],
         'level': 'WARNING',
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': env.str('DJANGO_LOG_LEVEL', ''),
-            'propagate': False,
-        },
-    },
-}
+})
+
+
+
+# https://sentry.io/
+sentry_sdk.init(
+    dsn="https://2ad4b2124f084cfca9f2dcfe33264f42@o466669.ingest.sentry.io/5481167",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
