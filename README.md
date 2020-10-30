@@ -23,6 +23,7 @@
 > Next Features:
 - LOGGING (for prod purpose)
 - Release
+- Supervisor
 
 <br />
 <br />
